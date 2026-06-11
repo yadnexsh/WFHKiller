@@ -110,4 +110,82 @@ QCalendarWidget QSpinBox {
     color: #e0e0e0;
 }
 
+/* --- Tab Widget Styling --- */
+QTabWidget::pane {
+    border: 1px solid #3c3f41;
+    border-radius: 6px;
+    background-color: #1e1f22;
+    top: -1px; 
+}
+QTabBar::tab {
+    background-color: #282a2e;
+    color: #8c8c8c;
+    border: 1px solid #3c3f41;
+    border-bottom-color: #3c3f41;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    padding: 6px 16px;
+    font-weight: bold;
+}
+QTabBar::tab:selected {
+    background-color: #1e1f22;
+    color: #d18b47;
+    border-bottom-color: #1e1f22; /* Blends tab into pane */
+}
+QTabBar::tab:hover:!selected {
+    background-color: #3c3f41;
+    color: #e0e0e0;
+}
+
+/* --- Custom Calendar Header Styling --- */
+QPushButton#header_dropdown {
+    background-color: transparent;
+    border: none;
+    font-size: 14px;
+    font-weight: bold;
+    color: #e0e0e0;
+}
+QPushButton#header_dropdown:hover {
+    color: #d18b47;
+}
+QToolButton {
+    background-color: transparent;
+    border: none;
+    color: #8c8c8c;
+    font-weight: bold;
+    font-size: 14px;
+}
+QToolButton:hover {
+    color: #e0e0e0;
+}
+QPushButton#btn_today {
+    background-color: #282a2e;
+    color: #8c8c8c;
+    border: 1px solid #3c3f41;
+    padding: 5px;
+    font-weight: normal;
+}
+QPushButton#btn_today:hover {
+    color: #e0e0e0;
+    border: 1px solid #555;
+}
+
+/* --- Grid Popup Menu Styling --- */
+QMenu#grid_menu {
+    background-color: #282a2e;
+    border: 1px solid #3c3f41;
+    border-radius: 4px;
+}
+QPushButton#grid_btn {
+    background-color: #3c3f41;
+    color: #e0e0e0;
+    border: none;
+    border-radius: 3px;
+    padding: 8px 12px;
+}
+QPushButton#grid_btn:hover {
+    background-color: #d18b47;
+    color: #1e1f22;
+}
+
 """
