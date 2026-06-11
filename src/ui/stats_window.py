@@ -1,9 +1,9 @@
+import ctypes
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel, QCalendarWidget, QFrame
 from PySide6.QtCore import Qt, QDate
-from PySide6.QtGui import QTextCharFormat, QColor # ADD THESE TWO
+from PySide6.QtGui import QTextCharFormat, QColor
 from config import Config
 from .styles import BASECAMP_QSS
-
 class StatsWindow(QWidget):
     def __init__(self, db_manager):
         super().__init__()
@@ -19,6 +19,13 @@ class StatsWindow(QWidget):
 
         self.setup_ui()
         self.update_stats(QDate.currentDate())
+        
+        try:
+            hwnd = int(self.winId())
+            # 20 is the DWMWA_USE_IMMERSIVE_DARK_MODE flag for modern Windows
+            ctypes.windll.dwmapi.DwmSetWindowAttribute(hwnd, 20, ctypes.byref(ctypes.c_int(1)), 4)
+        except Exception:
+            pass # Fails silently if you ever run this on an older Windows machine
 
     def setup_ui(self):
         self.layout = QHBoxLayout(self)
@@ -32,7 +39,14 @@ class StatsWindow(QWidget):
         # Hide the ugly week numbers on the left side
         self.calendar.setVerticalHeaderFormat(QCalendarWidget.NoVerticalHeader)
         
-        # Force Sunday to stay a vibrant red in dark mode
+        # 1. Force standard text color for Mon-Sat (Overwrites Qt's native weekend behavior)
+        standard_format = QTextCharFormat()
+        standard_format.setForeground(QColor("#e0e0e0"))
+        
+        for day in [Qt.Monday, Qt.Tuesday, Qt.Wednesday, Qt.Thursday, Qt.Friday, Qt.Saturday]:
+            self.calendar.setWeekdayTextFormat(day, standard_format)
+
+        # 2. Force Sunday to stay a vibrant red
         sunday_format = QTextCharFormat()
         sunday_format.setForeground(QColor("#ff4a4a")) 
         self.calendar.setWeekdayTextFormat(Qt.Sunday, sunday_format)
