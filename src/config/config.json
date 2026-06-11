@@ -1,0 +1,18 @@
+{
+    "app_settings": {
+        "interval_ms": 3600000,
+        "polling_rate_seconds": 60
+    },
+    "targets": {
+        "daily_water_target_ml": 4000,
+        "trek_day_water_target_ml": 5000,
+        "water_per_interval_ml": 330,
+        "bmc_target_date": "2027-04-01",
+        "bmc_location": "NIMAS Dirang"
+    },
+    "alarms": {
+        "lunch_time": "13:00",
+        "dinner_time": "20:00",
+        "sleep_prep_time": "23:00"
+    }
+}

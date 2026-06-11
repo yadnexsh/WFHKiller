@@ -187,5 +187,34 @@ QPushButton#grid_btn:hover {
     background-color: #d18b47;
     color: #1e1f22;
 }
+/* --- Exercise List Styling --- */
+QListWidget {
+    background-color: #282a2e;
+    border: 1px solid #3c3f41;
+    border-radius: 4px;
+    color: #e0e0e0;
+    padding: 5px;
+    font-size: 14px;
+}
 
+QListWidget::item {
+    padding: 8px;
+    border-radius: 3px;
+}
+
+QListWidget::item:selected {
+    background-color: #3b533e; /* Matches your 'Done' button green */
+    color: white;
+}
+
+QListWidget::item:hover {
+    background-color: #3c3f41;
+}
+
+/* Center Buttons in Exercise Tab */
+QWidget#exercise_tab QPushButton {
+    min-width: 40px;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
 """

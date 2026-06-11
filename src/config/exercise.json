@@ -1,0 +1,28 @@
+{
+    "exercises": [
+        {
+            "name": "Squats",
+            "sets": 3,
+            "reps": 15,
+            "time_sec": null
+        },
+        {
+            "name": "Plank",
+            "sets": 1,
+            "reps": null,
+            "time_sec": 30
+        },
+        {
+            "name": "Calf Raises",
+            "sets": 3,
+            "reps": 20,
+            "time_sec": null
+        },
+        {
+            "name": "Lunges",
+            "sets": 3,
+            "reps": 10,
+            "time_sec": null
+        }
+    ]
+}
