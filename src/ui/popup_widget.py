@@ -3,6 +3,7 @@ from .styles import BASECAMP_QSS
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QApplication, QFrame
 from PySide6.QtCore import Qt, QPropertyAnimation, QPoint, QEasingCurve, Signal
 from config import Config
+import random
 
 class ReminderPopup(QWidget):
     # Custom signals to tell the main app what the user chose
@@ -98,26 +99,48 @@ class ReminderPopup(QWidget):
         self.anim.setEasingCurve(QEasingCurve.OutBack) 
 
     def show_popup(self):
-        """Calculates screen position, randomizes the exercise, and slides in."""
-        # Randomize the physical task
-        task = random.choice(self.exercises)
-        self.exercise_label.setText(f"🏃‍♂️ {task}")
+        import random
+        from PySide6.QtGui import QGuiApplication
+        from PySide6.QtCore import QPropertyAnimation, QEasingCurve
+        from config import Config
+        
+        # 1. Fetch the active rotation from the config
+        active_exercises = Config.get_active_exercises()
+        
+        # 2. Pick a random exercise and format the text
+        if not active_exercises:
+            self.exercise_label.setText("🏃‍♂️ No active exercises in rotation!")
+        else:
+            ex = random.choice(active_exercises)
+            name = ex.get("name", "Unknown")
+            sets = ex.get("sets")
+            reps = ex.get("reps")
+            time_sec = ex.get("time_sec")
+            
+            if time_sec:
+                self.exercise_label.setText(f"🏃‍♂️ {name} ({time_sec} sec)")
+            elif sets and reps:
+                self.exercise_label.setText(f"🏃‍♂️ {name} ({sets}x{reps})")
+            else:
+                self.exercise_label.setText(f"🏃‍♂️ {name}")
 
-        # Calculate position (Bottom Right corner, above the taskbar)
-        screen = QApplication.primaryScreen().availableGeometry()
-        
-        # Target resting position
-        end_x = screen.width() - self.width() - 20
-        end_y = screen.height() - self.height() - 20
-        
-        # Start position (just below the screen)
-        start_y = screen.height() + 10
-        
-        # Apply positions and start animation
-        self.anim.setStartValue(QPoint(end_x, start_y))
-        self.anim.setEndValue(QPoint(end_x, end_y))
-        
+        # 3. Calculate position (Bottom-Right corner of the primary screen)
+        screen_geometry = QGuiApplication.primaryScreen().availableGeometry()
+        target_x = screen_geometry.width() - self.width() - 20
+        target_y = screen_geometry.height() - self.height() - 20
+        self.move(target_x, target_y)
+
+        # 4. Show and Animate (Smooth Fade-In)
+        self.setWindowOpacity(0.0)
         self.show()
+        self.raise_()           # Forces the window to the front
+        self.activateWindow()   # Grabs focus
+
+        self.anim = QPropertyAnimation(self, b"windowOpacity")
+        self.anim.setDuration(400) # 400 milliseconds
+        self.anim.setStartValue(0.0)
+        self.anim.setEndValue(1.0)
+        self.anim.setEasingCurve(QEasingCurve.InOutQuad)
         self.anim.start()
 
     def hide_popup(self):

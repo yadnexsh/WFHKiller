@@ -64,6 +64,20 @@ class ConfigManager:
         cls.initialize()
         with open(cls.EXERCISE_JSON_PATH, 'r', encoding='utf-8') as f:
             return json.load(f).get("exercises", [])
+        
+    @classmethod
+    def save_exercises(cls, exercise_list):
+        """Overwrites the exercise.json file with new data."""
+        cls.initialize()
+        with open(cls.EXERCISE_JSON_PATH, 'w', encoding='utf-8') as f:
+            json.dump({"exercises": exercise_list}, f, indent=4)
+            
+    @classmethod
+    def get_active_exercises(cls):
+        """Returns only the exercises that have been moved to the Active list."""
+        all_ex = cls.get_exercises()
+        # If 'is_active' doesn't exist yet, it defaults to False
+        return [ex for ex in all_ex if ex.get("is_active", False)]
 
 # 2. The Config Wrapper
 # This ensures we don't have to rewrite the rest of the application.
@@ -88,6 +102,11 @@ class Config:
     @staticmethod
     def get_exercises():
         return ConfigManager.get_exercises()
+    
+    @staticmethod
+    def save_exercises(exercise_list):
+        ConfigManager.save_exercises(exercise_list)
+    
         
     @staticmethod
     def reload():
@@ -112,3 +131,6 @@ class Config:
         except ValueError:
             # Fallback just in case someone types the JSON date wrong
             return 0
+    @staticmethod
+    def get_active_exercises():
+        return ConfigManager.get_active_exercises()

@@ -1,28 +1,32 @@
 {
     "exercises": [
         {
-            "name": "Squats",
-            "sets": 3,
-            "reps": 15,
-            "time_sec": null
-        },
-        {
-            "name": "Plank",
-            "sets": 1,
-            "reps": null,
-            "time_sec": 30
-        },
-        {
             "name": "Calf Raises",
-            "sets": 3,
             "reps": 20,
-            "time_sec": null
+            "sets": 3,
+            "time_sec": null,
+            "is_active": false
         },
         {
             "name": "Lunges",
-            "sets": 3,
             "reps": 10,
+            "sets": 3,
+            "time_sec": null,
+            "is_active": false
+        },
+        {
+            "is_active": true,
+            "name": "Squats",
+            "reps": 15,
+            "sets": 3,
             "time_sec": null
+        },
+        {
+            "is_active": true,
+            "name": "Plank",
+            "reps": null,
+            "sets": 1,
+            "time_sec": 30
         }
     ]
 }

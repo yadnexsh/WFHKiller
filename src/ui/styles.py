@@ -217,4 +217,17 @@ QWidget#exercise_tab QPushButton {
     font-size: 16px;
     margin-bottom: 5px;
 }
+/* --- Text Input Editor Styling --- */
+QLineEdit {
+    background-color: #1e1f22;
+    color: #e0e0e0;
+    border: 1px solid #3c3f41;
+    border-radius: 3px;
+    padding: 4px 8px;
+    font-size: 13px;
+}
+
+QLineEdit:focus {
+    border: 1px solid #d18b47;
+}
 """

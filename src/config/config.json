@@ -1,6 +1,6 @@
 {
     "app_settings": {
-        "interval_ms": 3600000,
+        "interval_ms": 10000,
         "polling_rate_seconds": 60
     },
     "targets": {
@@ -8,7 +8,7 @@
         "trek_day_water_target_ml": 5000,
         "water_per_interval_ml": 330,
         "bmc_target_date": "2027-04-01",
-        "bmc_location": "NIMAS Dirang"
+        "bmc_location": "NIM Uttarkashi"
     },
     "alarms": {
         "lunch_time": "13:00",
