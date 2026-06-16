@@ -1,0 +1,14 @@
+# Local Database (Do not commit personal tracking data!)
+basecamp_data.sqlite
+
+# Python Cache
+__pycache__/
+*.pyc
+
+# Virtual Environments (If you ever use one)
+venv/
+env/
+
+# IDE Settings (Optional, but good practice)
+.vscode/
+.idea/
